@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+    Sobre | Adota Pet
+{% endblock %}
+
+{% block corpo %}
+    <section id="about" class="container pt-5 pb-3">
+            <h2 class="text-center text-secondary">Quem somos?</h2>
+            <div class="flex-row d-none d-md-flex pt-5 pb-5">
+                <div class=" w-50 d-flex align-items-center justify-content-center">
+                    <div class="w-75 p-3 border border-secondary aboutBoard">
+                        <span class=" mx-auto d-block text-secondary">
+                            “Lorem ipsum dolor sit amet, consectetur
+                            adipiscing elit, sed do eiusmod tempor incididunt ut
+                            laboLorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore magna in” -NOA
+                        </span>
+                    </div>
+
+                </div>
+                <div class="w-50">
+                    <h3>So what does the new record for the lowest level of winter ice actually mean</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                        incididunt ut labore et dolore magna aliqua. Mi quis hendrerit dolor magna eget est lorem.
+                        Varius morbi enim nunc faucibus a pellentesque sit. Sed velit dignissim sodales ut eu sem
+                        integer vitae justo</p>
+                    <p>odio morbi quis commodo odio aenean sed. Morbi leo urna molestie at elementum.
+                        Lectus urna duis convallis convallis tellus
+                        id interdum velit.
+                        Quis ipsum suspendisse ultrices gravida. Pharetra diam sit amet nisl suscipit adipiscing
+                        Risus nullam eget felis eget nunc lobortis mattis.</p>
+                    <p>
+                        Tempor orci eu lobortis elementum nibh tellus molestie. Diam vel quam
+                        elementum pulvinar etiam. Tortor condimentum lacinia quis vel eros.
+                        Facilisis mauris sit amet massa vitae. Eu non diam phasellus vestibulum lorem.
+                    </p>
+                    <p>
+                        Risus feugiat in ante metus dictum at. Turpis in eu mi bibendum neque egestas congue quisque.
+                        Venenatis cras sed felis eget velit. Eget felis eget nunc lobortis mattis aliquam
+                        faucibus purus in.
+                    </p>
+                </div>
+            </div>
+            <div class="pt-4 d-md-none">
+                <div class=" d-flex align-items-center justify-content-center pb-3">
+                    <div class="w-50 p-2 border border-secondary aboutBoard">
+                        <span class=" mx-auto d-block text-secondary">
+                            “Lorem ipsum dolor sit amet, consectetur
+                            adipiscing elit, sed do eiusmod tempor incididunt ut
+                            laboLorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore magna in” -NOA
+                        </span>
+                    </div>
+
+                </div>
+                <div class="pt-3 pb-2">
+                    <h3>So what does the new record for the lowest level of winter ice actually mean</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                        incididunt ut labore et dolore magna aliqua. Mi quis hendrerit dolor magna eget est lorem.
+                        Varius morbi enim nunc faucibus a pellentesque sit. Sed velit dignissim sodales ut eu sem
+                        integer vitae justo</p>
+                    <p>odio morbi quis commodo odio aenean sed. Morbi leo urna molestie at elementum.
+                        Lectus urna duis convallis convallis tellus
+                        id interdum velit.
+                        Quis ipsum suspendisse ultrices gravida. Pharetra diam sit amet nisl suscipit adipiscing
+                        Risus nullam eget felis eget nunc lobortis mattis.</p>
+                    <p>
+                        Tempor orci eu lobortis elementum nibh tellus molestie. Diam vel quam
+                        elementum pulvinar etiam. Tortor condimentum lacinia quis vel eros.
+                        Facilisis mauris sit amet massa vitae. Eu non diam phasellus vestibulum lorem.
+                    </p>
+                    <p>
+                        Risus feugiat in ante metus dictum at. Turpis in eu mi bibendum neque egestas congue quisque.
+                        Venenatis cras sed felis eget velit. Eget felis eget nunc lobortis mattis aliquam
+                        faucibus purus in.
+                    </p>
+                </div>
+            </div>
+            <img src="{% static 'images/girlWithDog.png' %}" class="img-fluid mx-auto d-block text-center w-75 mb-4"
+                alt="Girl with a dog">
+            <div id="map-container-google-1" class="z-depth-1-half map-container w-100 h-50 mb-3">
+                <iframe
+                    src="https://maps.google.com/maps?q=Uff-Instituto-De-Computação&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                    frameborder="0" class="w-100 h-50" style="border:0" allowfullscreen></iframe>
+            </div>
+        </section>
+{% endblock %}

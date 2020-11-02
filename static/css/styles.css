@@ -1,0 +1,438 @@
+/* Reset CSS */
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* End Reset CSS */
+@font-face{
+    font-family: Chelsea;
+    src: url(../webfonts/ChelseaMarket-Regular.ttf);
+}
+
+@font-face{
+    font-family: Titan;
+    src: url(../webfonts/TitanOne-Regular.ttf);
+}
+
+@font-face{
+    font-family: Comfortaa;
+    src: url(../webfonts/Comfortaa-Medium.ttf);
+}
+
+h1{
+    font-family: Chelsea !important;
+}
+
+h2{
+    font-family: Titan !important;
+}
+
+#logoNav{
+    height: 50px;
+    margin-left: 10px;
+}
+
+.navbar{
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    width: 100%;
+    box-shadow: 10px 3px 10px #252525
+}
+
+
+.footer{
+    box-shadow: 10px -3px 10px #252525;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+}
+.navbarMain{
+    float: left;
+}
+
+.linkNavBar a{
+    font-family: Chelsea;
+    transition: 0.3s;
+    border-radius: 20px;
+}
+.linkNavBar a:hover{
+    background-color: var(--light);
+    transition: 0.3s;
+    color: var(--primary) !important;
+}
+
+.linkNavBar button:hover{
+    background-color: var(--light);
+    transition: 0.3s;
+    color: var(--primary) !important;
+    border-radius: 25px;
+}
+
+.linkNavBar button{
+    border-radius: 25px;
+    transition: 0.3s;
+}
+
+.register{
+    height: unset !important;
+}
+
+
+@media only screen and (max-width: 372px){
+    
+    .linkNavBar{
+        width: 100% !important;
+        justify-content: center;
+    }
+
+    .linkNavBar a{
+        margin-top: 10px;
+    }
+
+    #main{
+        height: 100vh
+    }
+
+    #main .mainBackground{
+        height: calc(100vh - 126px) !important;
+    }
+
+
+    #login{
+        height: calc(100vh - 192px);
+    }
+
+    .register{
+        height: unset !important
+    }
+
+    .navbar-collapse{
+        
+    }
+
+}
+
+@media only screen and (max-width: 460px){
+    #sucessCase img{
+        height: 30vh !important;
+    }
+}
+
+#main{
+    background: url("../images/animal1.png");
+    background-size: 100px;
+    background-repeat: no-repeat;
+    height: 100vh;
+    background-size:cover;
+    background-position: center center;
+    display: vertical-align;
+}
+
+#main .mainBackground{
+    height: calc(100vh - 66px);
+    display: table-cell;
+    width: 100vw;
+    vertical-align: middle;
+}
+
+#register{
+    height: calc(100vh - 132px) !important
+}
+
+#main h1{
+    font-size: 60px;
+}
+
+#icon-scroll,
+#icon-scroll:before {
+    position: absolute;
+    left: 50%
+}
+#icon-scroll {
+    width: 30px !important;
+    height: 50px !important;
+    margin-left: -20px;
+    bottom: 10px;
+    margin-top: -35px;
+    border: 2px solid var(--primary);
+    pointer-events: none;
+    box-shadow: 10px 5px 5px black;
+    border-radius: 25px;
+
+}
+
+#icon-scroll:before {
+    content: '';
+    width: 4px !important;
+    height: 8px !important;
+    background: var(--light);
+    margin-left: -4px;
+    top: 8px;
+    left: 15px;
+    border-radius: 4px;
+    animation-duration: 2.2s;
+    animation-iteration-count: infinite;
+    animation-name: scroll;
+    animation-timing-function: cubic-bezier(0.65, 0, 0, 1.01);
+    
+}
+
+@keyframes scroll {
+    0% {
+        opacity: 1
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(26px)
+    }
+}
+
+@media only screen and (max-width: 1024px){
+    @keyframes scrollphone {
+        0% {
+          transform: translateY(20px);
+          opacity: 1;
+        }
+        10% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(5px);
+          opacity: 0;
+        }
+      }
+      #icon-scroll {
+        width: 3px !important;
+        padding: 6px 12px !important; 
+        height: 35px;
+        border: 2px solid var(--primary) !important;
+        border-radius: 5px;
+        opacity:.7;
+      }
+      #icon-scroll:before {
+        left: 15px;
+        content: "";
+        width: 2px !important;
+        height: 2px;
+        border-radius: 50%;
+        background-color: var(--light);
+        animation-name: scrollphone;
+        animation-duration: 2.2s;
+        animation-timing-function: cubic-bezier(0.65, 0, 0, 1.01);
+        animation-iteration-count: infinite;
+      }
+
+}
+
+/* IGNORE EVERYTHING BELOW */
+
+#sucessCase img{
+    height: 50vh;
+    border: 10px solid var(--blue);
+    box-shadow: 2px 2px 3px 0px #252525;
+    margin-bottom: 20px;
+    max-width: 90% !important;
+    filter: brightness(70%);
+    border-radius: 25px !important; 
+}
+
+.link-like, .link-dislike{
+    text-decoration: none;
+    border: none;
+    background: none;
+    color: var(--primary);
+    padding: 0px;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+  .wrapper {
+    min-height: 100%;
+  
+    /* Equal to height of footer */
+    /* But also accounting for potential margin-bottom of last child */
+    margin-bottom: -66px;
+  }
+  .footer,
+  .push {
+    height: 66px;
+    background: var(--primary);
+  }
+
+  .push{
+      background: none;
+  }
+
+ .aboutBoard{
+      box-shadow: 5px 5px 15px #252525;
+  }
+
+  .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+
+ #login{
+     height: calc(100vh - 132px);
+ }
+
+ #login input[type=email], #login input[type=password], #login input[type=text], #login textarea, #login input, select, option{
+     background-color: var(--primary) !important;
+     color: var(--light) !important;
+ }
+
+ #talkToUs input, #talkToUs textarea{
+     color: var(--black);
+     box-shadow: none;
+     border: 3px solid var(--blue);
+     
+ }
+
+ #talkToUs textarea{
+     min-height: 86px;
+     max-height: 200px;
+     overflow: auto;
+     webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+
+ }
+
+ #talkToUs button, #login button{
+    color: var(--light);
+    transition: 0.3s;
+    font-family: Titan;
+    border-radius: 35px !important;
+    letter-spacing: 1px !important;
+    background-color: var(--primary);
+ }
+
+ #talkToUs label{
+     color: var(--primary) !important
+ }
+
+ #login input:focus{
+     color: var(--light);
+ }
+
+*::placeholder, #login:-ms-input-placeholder, #login ::-webkit-input-placeholder{
+     font-family: Comfortaa !important;
+ } 
+
+ #login button:hover{
+     transition: 0.3s;
+
+ }
+
+ #login button{
+     color: var(--light);
+     transition: 0.3s;
+     font-family: Comfortaa;
+     border-radius: 35px !important;
+     letter-spacing: 4px !important;
+ }
+
+ #login a{
+     color: var(--cyan) !important;
+     text-decoration: none;
+     font-family: Comfortaa;
+ }
+
+ #login label{
+     font-family: Comfortaa;
+     color: var(--blue) !important;
+ }
+
+
+ #feed form input:focus{
+     outline: none;
+ }
+
+ #feed form input{
+     border-radius: 25px;
+     color: var(--white);
+ }
+
+ #feed h3{
+     color: var(--blue);
+     font-family: Titan;
+ }
+
+
+ button:active{
+     background-color: none;
+     border: none;
+     outline: none;
+ }
+
+ button:focus{
+     outline: none !important;
+ }
+
+.mainBackground button:hover{
+     color: var(--blue) !important;
+     transition: 0.3s;
+     background-color: var(--light) !important;
+
+ }
+
+ #intro img{
+     border: 8px solid var(--blue);
+     border-radius: 25px;
+ }
+
+ #feed input{
+     background-color: var(--blue) !important;
+ }
+
+ #checkbox-error{
+     display: block
+ }

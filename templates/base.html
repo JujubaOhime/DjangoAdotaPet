@@ -1,0 +1,80 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>
+        {% block titulo %}
+            Título default
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/all.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
+</head>
+<body>
+    <div class="wrapper">
+    {% block header %}
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary ">
+            <a href="/" class=" linkLogo"><img src="{% static 'images/logo.png' %}" id="logoNav"
+                class="img-responsive img-fluid " alt="logo adotaPet"></a>
+            <button class="navbar-toggler justify-content-end mr-1" type="button"
+            data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Alterna navegação">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo02">
+              <ul class="nav linkNavBar mt-lg-0 justify-content-center">
+
+
+
+                <li class="nav-item active ">
+                  <a class="nav-link text-white" href="{% url 'pet:index' %}">Adote Aqui<span class="sr-only">(Página atual)</span></a>
+                </li>
+
+                <div class="btn-group">
+                  <a href="login.html"><button type="button" class="btn text-white">Login</button></a>
+                  <button type="button" class="btn dropdown-toggle dropdown-toggle-split text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="register.html">Cadastro</a>
+                  </div>
+                </div>
+
+                <li class="nav-item">
+                  <a class="nav-link text-white" href="/about/">Sobre</a>
+                </li>
+
+              </ul>
+            </div>
+        </nav>
+    {% endblock %}
+    {% block corpo %}
+
+    {% endblock %}
+    <div class="push"></div>
+    </div>
+
+    {% block footer %}
+        <footer class="footer d-flex align-items-center">
+            <div class="ml-4 d-inline-flex">
+              <a href="https://www.facebook.com/jujubaohime"><img src="{% static 'images/iconFacebook.svg' %}", style="height: 45px; width: 45px;" alt="Facebook Icon"></a>
+              <a href="https://www.instagram.com/jujubaohime/"><img src="{% static 'images/iconInstagram.svg' %}", class="ml-3" style="height: 45px; width: 45px;" alt="Instagram Icon"></a>
+            </div>
+            <h1 class="m-0 text-light h5 mr-3 ml-2 text-right w-100" style="font-size: 15px;">Desenvolvido por Amélia Guerreiro</h1>
+        </footer>
+    {% endblock %}
+
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/jquery.mask.js' %}"></script>
+    <script src="{% static 'js/jquery.validate.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+
+</body>
+</html>
