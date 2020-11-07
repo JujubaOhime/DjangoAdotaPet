@@ -10,6 +10,8 @@
     <section id="login" class="d-flex w-100 justify-content-center align-items-center">
         <form class='align-items-center container' action="" method="POST" novalidate style="width: 310px;">
 
+            <h2 class="text-secondary pt-3 text-center text-uppercase pb-2">Login</h2>
+
             {% if form.non_field_errors %}
                 <div class="row" style="margin-top: 10px">
                     <div class="col-lg-6">
@@ -24,7 +26,7 @@
                 </div>
             {% endif %}
 
-            <h2 class="text-secondary pt-3 text-center text-uppercase pb-2">Login</h2>
+
 
             <div class="form-group">
                 <label for="id_username" class="font-weight-bold text-secondary">Conta</label>
@@ -40,7 +42,7 @@
 
             <div class="form-group">
                 <label for="id_password" class="font-weight-bold text-secondary">Senha</label>
-                {{ form.username }}
+                {{ form.password }}
                 {% if form.password.errors %}
                     <div class="alert alert-danger mb-0" style="padding-top: 4px; padding-bottom: 4px">
                         {% for error in form.password.errors %}
@@ -61,4 +63,6 @@
 
         </form>
     </section>
+
+
 {% endblock %}

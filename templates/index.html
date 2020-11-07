@@ -4,42 +4,6 @@
 {% block titulo %}
     Index.html de projeto
 {% endblock %}
-{% block header %}
-        <nav class="navbar navbar-expand-lg navbar-dark navbarMain bg-primary ">
-            <a href="/" class=" linkLogo"><img src="{% static 'images/logo.png' %}" id="logoNav"
-                class="img-responsive img-fluid " alt="logo adotaPet"></a>
-            <button class="navbar-toggler justify-content-end mr-1" type="button"
-            data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Alterna navegação">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo02">
-              <ul class="nav linkNavBar mt-lg-0 justify-content-center">
-
-
-
-                <li class="nav-item active ">
-                  <a class="nav-link text-white" href="{% url 'pet:index' %}">Adote Aqui<span class="sr-only">(Página atual)</span></a>
-                </li>
-
-                <div class="btn-group">
-                  <a href="{% url 'autenticacao:login' %}"><button type="button" class="btn text-white">Login</button></a>
-                  <button type="button" class="btn dropdown-toggle dropdown-toggle-split text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="sr-only">Toggle Dropdown</span>
-                  </button>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'pet:lista_pets' %}">Cadastro</a>
-                  </div>
-                </div>
-
-                <li class="nav-item">
-                  <a class="nav-link text-white" href="/about/">Sobre</a>
-                </li>
-
-              </ul>
-            </div>
-        </nav>
-{% endblock %}
 
 {% block corpo %}
 
@@ -162,7 +126,12 @@
 
 {% endblock %}
 
+{% block script %}
+    <script>
+        $('nav').addClass('navbarMain')
+    </script>
 
+{% endblock %}
 
 <!--
 

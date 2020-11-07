@@ -12,6 +12,8 @@ class Pet(models.Model):
     sexo = models.CharField(max_length=1, choices=sexo_escolhas, default='N')
     descricao = models.TextField()
     data_cadastro = models.DateField()
+    likes = models.PositiveIntegerField(default=0)
+    dislikes = models.PositiveIntegerField(default=0)
     raca = models.CharField(max_length=20, blank=True)
     estado_escolhas = [('AC', 'Acre'), ('AL', 'Alagoas'), ('AP', 'Amapá'), ('AM', 'Amazonas'),
                        ('BA', 'Bahia'), ('CE', 'Ceará'), ('ES', 'Espírito Santo'), ('GO', 'Goiás'),
