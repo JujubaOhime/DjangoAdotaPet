@@ -33,3 +33,17 @@ class Pet(models.Model):
 
     def __str__(self):
         return self.nome
+
+    def get_sexo(self):
+        if self.sexo == "M":
+            return "Macho"
+        elif self.sexo == "F":
+            return "Fêmea"
+        elif self.sexo == "N":
+            return "Não sabe"
+
+    def get_disponivel(self):
+        if self.disponivel:
+            return "Sim"
+        else:
+            return "Não"

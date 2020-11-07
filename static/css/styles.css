@@ -436,3 +436,16 @@ html, body {
  #checkbox-error{
      display: block
  }
+
+ input, input:focus{
+    border-width: 0px !important;
+    outline:0px !important; /* I have also tried outline:none */
+    -webkit-appearance:none !important;
+    box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+ }
+
+ .form-control:focus{
+     box-shadow: none !important;
+ }

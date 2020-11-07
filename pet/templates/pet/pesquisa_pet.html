@@ -1,0 +1,97 @@
+{%  extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+    Pesquisa de Pets
+{% endblock %}
+
+{% block corpo %}
+    <div class="container">
+
+        <form action="" method="GET" class="d-flex justify-content-center justify-content-sm-end mb-3 mt-5">
+            <div class="p-1 bg-secondary rounded rounded-pill shadow-sm mb-4" style="background-color: var(--blue) !important;">
+                <div class="input-group">
+                    {{ form.nome }}
+                     <div class="input-group-append">
+                        <button id="button-addon1" type="submit" class="btn btn-link text-light">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!--
+                <input type="text" name="nome" id="id_nome" class="form-control form-control-sm" maxlength="100">
+                -->
+            </div>
+        </form>
+
+        {% if pets %}
+            <h1 class="mb-4 mt-4 text-center text-primary" style="font-size: 50px">Lista de Pets</h1>
+            <table style="width: 100%" class="table table-sm table-bordered table-responsive mb-4">
+                <thead>
+                    <tr>
+                        <th class="text-center">Imagem</th>
+                        <th class="text-center">Categoria</th>
+                        <th class="text-center">Nome</th>
+                        <th class="text-center">Disponível</th>
+                        <th class="text-center">Data Cadastro</th>
+                        <th class="text-center">Sexo</th>
+                        <th class="text-center">Local</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%  for pet in pets %}
+                        <tr>
+                            <td class="text-center align-middle">
+                                <img style="width: 200px; height: 150px" class="mb-2 mt-2" src="{% static 'images/pets/' %}{{ pet.imagem }}" alt="{{ pet.nome }}">
+                            </td>
+                            <td class="text-center align-middle">
+                                {{ pet.categoria }}
+                            </td>
+                            <td width="10%" class="text-center align-middle">
+                                {{ pet.nome }}
+                            </td>
+                            <td width="5%" class="text-center align-middle">
+                                {{ pet.get_disponivel }}
+                            </td>
+                            <td width="10%" class="text-center align-middle">
+                                {{ pet.data_cadastro | date:'d/m/y' }}
+                            </td>
+                            <td width="10%" class="text-center align-middle">
+                                {{ pet.get_sexo }}
+                            </td>
+                            <td width="10%" class="text-center align-middle">
+                                {{ pet.cidade }} - {{ pet.estado }}
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div style='font-size: 14px; margin-bottom: 28px' class="justify-content-center d-flex">
+                {% if pets.has_other_pages %}
+                 <ul class='pagination'>
+                    {% if pets.has_previous %}
+                       <li class='page-item'><a class='page-link' href='?pagina={{ pets.previous_page_number }}&nome={{nome}}'>Anterior</a></li>
+                    {% else %}
+                       <li class='page-item disabled'><a class='page-link' href='#' tabindex='-1'>Anterior</a></li>
+                    {% endif %}
+                    {% for i in pets.paginator.page_range %}
+                       {% if pets.number == i %}
+                          <li class='page-item active'><a class='page-link' href='#'>{{ i }} </a></li>
+                       {% else %}
+                          <li class='page-item'><a class='page-link' href='?pagina={{ i }}&nome={{nome}}'>{{ i }}</a></li>
+                       {% endif %}
+                    {% endfor %}
+                    {% if pets.has_next %}
+                       <li class='page-item'><a class='page-link' href='?pagina={{ pets.next_page_number }}&nome={{nome}}'>Próxima</a></li>
+                    {% else %}
+                       <li class='page-item disabled'><a class='page-link' href='#' tabindex='-1'>Próxima</a></li>
+                    {% endif %}
+                 </ul>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

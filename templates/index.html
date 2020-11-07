@@ -23,12 +23,12 @@
                 </li>
 
                 <div class="btn-group">
-                  <a href="login.html"><button type="button" class="btn text-white">Login</button></a>
+                  <a href="{% url 'autenticacao:login' %}"><button type="button" class="btn text-white">Login</button></a>
                   <button type="button" class="btn dropdown-toggle dropdown-toggle-split text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="sr-only">Toggle Dropdown</span>
                   </button>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="register.html">Cadastro</a>
+                    <a class="dropdown-item" href="{% url 'pet:lista_pets' %}">Cadastro</a>
                   </div>
                 </div>
 
@@ -42,40 +42,6 @@
 {% endblock %}
 
 {% block corpo %}
-    <!--
-    {{ frase }}
-    <br>
-    <br>
-    <a href="/pet/">
-        Acessando a página index.html de produto utilizando caminho absoluto
-    </a>
-    <br>
-    <a href="pet/">
-        Acessando a página index.html de produto utilizando caminho relativo
-    </a>
-    <br>
-    <a href="{% url 'pet:index' %}">
-        Acessando a página index.html de produto utilizando caminho tag.url
-    </a>
-    <br>
-    <br>
-    <br>
-    <a href="/pet/paginas/pagina1/">
-        Acessando a página pagina1.html de produto utilizando caminho absoluto
-    </a>
-    <br>
-    <a href="/pet/paginas/pagina2/">
-        Acessando a página pagina2.html de produto utilizando caminho absoluto
-    </a>
-    <br>
-    <a href="{% url 'pet:pagina1' %}">
-        Acessando a página pagina1.html de produto utilizando caminho tag url
-    </a>
-    <br>
-    <a href="{% url 'pet:pagina2' %}">
-        Acessando a página pagina2.html de produto utilizando caminho tag url
-    </a>
-    -->
 
     <section id="main">
       <div class="mainBackground">

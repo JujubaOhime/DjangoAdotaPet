@@ -11,9 +11,10 @@
         {% endblock %}
     </title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/all.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/all.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+
 </head>
 <body>
     <div class="wrapper">
@@ -36,12 +37,13 @@
                 </li>
 
                 <div class="btn-group">
-                  <a href="login.html"><button type="button" class="btn text-white">Login</button></a>
+                  <a href="{% url 'autenticacao:login' %}"><button type="button" class="btn text-white">Login</button></a>
                   <button type="button" class="btn dropdown-toggle dropdown-toggle-split text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="sr-only">Toggle Dropdown</span>
                   </button>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="register.html">Cadastro</a>
+                    <a class="dropdown-item" href="{% url 'pet:lista_pets' %}">Listar Pets</a>
+                      <a class="dropdown-item" href="{% url 'pet:cadastra_pets' %}">Cadastra Pets</a>
                   </div>
                 </div>
 
@@ -53,9 +55,10 @@
             </div>
         </nav>
     {% endblock %}
-    {% block corpo %}
+        {% block corpo %}
 
-    {% endblock %}
+        {% endblock %}
+
     <div class="push"></div>
     </div>
 
