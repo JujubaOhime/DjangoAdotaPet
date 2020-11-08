@@ -2,7 +2,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django import forms
-from django.forms import DateInput
+from django.forms import DateInput, Select, RadioSelect, ChoiceField
 
 from autenticacao.models import PetOwner
 
@@ -87,19 +87,26 @@ class UsuarioFormCustomizado(UserCreationForm):
 
 class ProfileForm(forms.ModelForm):
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        self.fields['genero'].label = 'Gênero'
-        self.fields['genero'].required = True
-
-
-
     class Meta:
         model = PetOwner
         fields = ['genero', 'imagem', 'data_nascimento', 'cidade', 'cep', 'link_instagram',
                   'link_facebook', 'telefone', 'cpf', 'rg', 'estado']
         widgets = {
             'data_nascimento': DateInput(attrs={'type': 'date'}),
+
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+
+
+
+
+
+
+
+
+
+    genero = ChoiceField(label='', choices = (('M', 'Masculino'), ('F', 'Feminino')) )
 

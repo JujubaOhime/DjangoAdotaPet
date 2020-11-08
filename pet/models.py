@@ -8,10 +8,14 @@ class Pet(models.Model):
     imagem = models.CharField(max_length=50, blank=True)
     preco = models.DecimalField(max_digits=6, decimal_places=2, default=0)
     disponivel = models.BooleanField(default=False)
+    link_instagram = models.URLField(max_length=200, blank=True)
+    link_facebook = models.URLField(max_length=200, blank=True)
+    telefone = models.CharField(max_length=15)
     sexo_escolhas = [('F', 'Fêmea'), ('M', 'Macho'), ('N', 'Não sei')]
     sexo = models.CharField(max_length=1, choices=sexo_escolhas, default='N')
     descricao = models.TextField()
     data_cadastro = models.DateField()
+    data_nascimento = models.DateField(blank=True)
     likes = models.PositiveIntegerField(default=0)
     dislikes = models.PositiveIntegerField(default=0)
     raca = models.CharField(max_length=20, blank=True)
@@ -49,3 +53,6 @@ class Pet(models.Model):
             return "Sim"
         else:
             return "Não"
+
+    def get_meses(self):
+        pass

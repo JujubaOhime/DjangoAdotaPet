@@ -6,5 +6,112 @@
 {% endblock %}
 
 {% block corpo %}
-    {{ frase }}
+  <section id="feed" class="w-100 justify-content-center align-items-center container">
+    <h2 class="text-center text-secondary pt-5 pb-5 d-block">Feed</h2>
+    <form action="" method="GET" class="d-flex justify-content-center justify-content-sm-end mb-3 mt-5">
+        <div class="p-1 bg-secondary rounded rounded-pill shadow-sm mb-4" style="background-color: var(--blue) !important;">
+            <div class="input-group">
+                {{ form.nome }}
+                 <div class="input-group-append">
+                    <button id="button-addon1" type="submit" class="btn btn-link text-light">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!--
+            <input type="text" name="nome" id="id_nome" class="form-control form-control-sm" maxlength="100">
+            -->
+        </div>
+    </form>
+    {% if pets %}
+        <div class="d-none d-sm-block">
+            {%  for pet in pets %}
+                <div style="height: 180px" class="d-flex mb-3">
+
+                    <div style="height: 180px; " class="w-25">
+                        <a href="{% url 'pet:exibe_pet' pet.id %}" style="text-decoration: none; cursor: pointer;">
+                            <img style="height: 120px; width: 120px; border-radius: 100px" class="img-fluid mx-auto d-block" src="{% static 'images/pets/' %}{{ pet.imagem }}" alt="{{ pet.nome }}">
+                            <h3 class="text-center mb-0" style="font-size: 20px">{{ pet.nome }}</h3>
+                        </a>
+                        <div class="d-inline-block w-100 text-center">
+
+                            <button class="mr-2 link-like" id="link-like" style="text-decoration: none;">
+                                <span class="like" id="like" data-like="8">8</span>
+                                <i class="far fa-thumbs-up"></i>
+                            </button>
+                            <button class="link-dislike" id="link-dislike" style="text-decoration: none;">
+                                <i class="far fa-thumbs-down"></i>
+                                <span class="dislike" id="dislike" data-dislike="3">3</span>
+                            </button>
+
+                        </div>
+
+
+                    </div>
+                    <div class="pl-3 w-75 " style="height: 180px;">
+                        <p class="text-primary font-weight-bold">Localização: {{ pet.cidade }} - {{ pet.estado }}</p>
+                        <p class="overflow-hidden ml-1 text-justify mb-0"
+                            style="-webkit-line-clamp: 4; display: -webkit-box; -webkit-box-orient: vertical;">
+                            {{ pet.descricao }}
+                        </p>
+                    </div>
+
+                </div>
+            {% endfor %}
+        </div>
+        <div class="d-sm-none">
+            {%  for pet in pets %}
+                <div class="mb-4">
+                    <div class="">
+                         <a href="{% url 'pet:exibe_pet' pet.id %}" style="text-decoration: none">
+                            <img style="height: 120px; width: 120px; border-radius: 100px" class="img-fluid mx-auto d-block" src="{% static 'images/pets/' %}{{ pet.imagem }}" alt="{{ pet.nome }}">
+                            <h3 class="text-center mb-0" style="font-size: 20px">{{ pet.nome }}</h3>
+                         </a>
+                        <div class="d-inline-block w-100 text-center mb-2">
+
+                            <button class="mr-2 link-like" id="link-like" style="text-decoration: none;">
+                                <span class="like" id="like" data-like="8">8</span>
+                                <i class="far fa-thumbs-up"></i>
+                            </button>
+                            <button class="link-dislike" id="link-dislike" style="text-decoration: none;">
+                                <i class="far fa-thumbs-down"></i>
+                                <span class="dislike" id="dislike" data-dislike="3">3</span>
+                            </button>
+
+                        </div>
+                    </div>
+                    <p class="text-primary font-weight-bold mb-1 text-center">Localização: {{ pet.cidade }} - {{ pet.estado }}</p>
+                    <p class="overflow-hidden text-justify mb-0 text-center"
+                        style="-webkit-line-clamp: 4; display: -webkit-box; -webkit-box-orient: vertical;">
+                        {{ pet.descricao }}
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+        <div style='font-size: 14px; margin-bottom: 28px' class="justify-content-center d-flex">
+                {% if pets.has_other_pages %}
+                 <ul class='pagination'>
+                    {% if pets.has_previous %}
+                       <li class='page-item'><a class='page-link' href='?pagina={{ pets.previous_page_number }}&nome={{nome}}'>Anterior</a></li>
+                    {% else %}
+                       <li class='page-item disabled'><a class='page-link' href='#' tabindex='-1'>Anterior</a></li>
+                    {% endif %}
+                    {% for i in pets.paginator.page_range %}
+                       {% if pets.number == i %}
+                          <li class='page-item active'><a class='page-link' href='#'>{{ i }} </a></li>
+                       {% else %}
+                          <li class='page-item'><a class='page-link' href='?pagina={{ i }}&nome={{nome}}'>{{ i }}</a></li>
+                       {% endif %}
+                    {% endfor %}
+                    {% if pets.has_next %}
+                       <li class='page-item'><a class='page-link' href='?pagina={{ pets.next_page_number }}&nome={{nome}}'>Próxima</a></li>
+                    {% else %}
+                       <li class='page-item disabled'><a class='page-link' href='#' tabindex='-1'>Próxima</a></li>
+                    {% endif %}
+                 </ul>
+                {% endif %}
+            </div>
+    {% endif %}
+  </section>
 {% endblock %}
