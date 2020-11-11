@@ -42,10 +42,10 @@
                 <tbody>
                     {%  for pet in pets %}
                         <tr>
-                            <td class="text-center align-middle">
-                                <img style="width: 200px; height: 150px" class="mb-2 mt-2" src="{% static 'images/pets/' %}{{ pet.imagem }}" alt="{{ pet.nome }}">
+                            <td class="text-center align-middle" width="15%">
+                                <img style="width: 150px; height: 150px; border-radius: 200px;" class="mb-2 mt-2" src="{% static 'images/pets/' %}{{ pet.imagem }}" alt="{{ pet.nome }}">
                             </td>
-                            <td class="text-center align-middle">
+                            <td class="text-center align-middle" width="15%">
                                 {{ pet.categoria }}
                             </td>
                             <td width="10%" class="text-center align-middle">

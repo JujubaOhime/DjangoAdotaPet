@@ -1,8 +1,10 @@
+import datetime
+
+from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from django import forms
-from django.forms import DateInput, Select, RadioSelect, ChoiceField
+from django.forms import ChoiceField, DateInput, RadioSelect, Select
 
 from autenticacao.models import PetOwner
 
@@ -84,29 +86,22 @@ class UsuarioFormCustomizado(UserCreationForm):
         if not any(char.isalpha() for char in valor):
             raise ValidationError('A senha deve ter pelo menos 1 letra.')
 
+class ProfileForm(forms.Form):
 
-class ProfileForm(forms.ModelForm):
-
-    class Meta:
-        model = PetOwner
-        fields = ['genero', 'imagem', 'data_nascimento', 'cidade', 'cep', 'link_instagram',
-                  'link_facebook', 'telefone', 'cpf', 'rg', 'estado']
-        widgets = {
-            'data_nascimento': DateInput(attrs={'type': 'date'}),
-
-        }
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-
+    genero = forms.ChoiceField(choices = PetOwner.genero_escolhas, widget=forms.Select(attrs={'class' :'form-control'}))
+    cpf = forms.CharField(max_length=14, widget=forms.TextInput(attrs={'class' :'form-control'}))
+    rg = forms.CharField(max_length=12, widget=forms.TextInput(attrs={'class' :'form-control'}))
+    cep = forms.CharField(max_length=9, widget=forms.TextInput(attrs={'class' :'form-control'}))
+    cidade = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'disabled': 'disabled',
+    'class': 'form-control'}))
+    estado = forms.CharField(max_length=2, widget=forms.TextInput(attrs={
+    'id': 'id_estado', 'name': 'estado', 'disabled': 'disabled', 'class' :'form-control'}))
+    data_nascimento = forms.DateField(required=True, widget = forms.DateInput(attrs={'class': 'form-control', 'type': 'date', 'min': '1899-01-01'}), initial=datetime.date.today)
+    link_instagram = forms.URLField(max_length=200, widget=forms.URLInput(attrs={'class' :'form-control'}))
+    link_facebook = forms.URLField(max_length=200, widget=forms.URLInput(attrs={'class' :'form-control'}))
+    telefone = forms.CharField(max_length=15, widget=forms.TextInput(attrs={'class' :'form-control'}))
 
 
 
 
-
-
-
-
-    genero = ChoiceField(label='', choices = (('M', 'Masculino'), ('F', 'Feminino')) )
 

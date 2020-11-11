@@ -10,8 +10,8 @@ from django.template.defaultfilters import slugify
 def index(request):
     form = PesquisaPetForm(request.GET)
     if form.is_valid():
-        nome = form.cleaned_data['nome']
-        lista_de_pets = Pet.objects.filter(nome__icontains=nome).order_by('nome')
+        query_string = form.cleaned_data['query_string']
+        lista_de_pets = Pet.objects.filter(nome__icontains=query_string).order_by('nome') | Pet.objects.filter(cidade__icontains=query_string).order_by('nome') | Pet.objects.filter(estado__icontains=query_string).order_by('nome')
         paginator = Paginator(lista_de_pets, 3)
         pagina = request.GET.get('pagina')
         page_obj = paginator.get_page(pagina)
@@ -19,7 +19,7 @@ def index(request):
         print(lista_de_pets)
         print(page_obj)
 
-        return render(request, 'pet/index.html', {'pets': page_obj, 'form': form, 'nome': nome})
+        return render(request, 'pet/index.html', {'pets': page_obj, 'form': form, 'query_string': query_string})
     else:
         raise ValueError("Ocorreu um erro inesperado ao tentr recuperar pet.")
 
@@ -28,7 +28,7 @@ def lista_pets(request):
     form = PesquisaPetForm(request.GET)
     if form.is_valid():
         query_string = form.cleaned_data['query_string']
-        lista_de_pets = Pet.objects.filter(nome__icontains=query_string).order_by('nome') | Pet.objects.filter(cidade__icontains=query_string).order_by('nome') | Pet.objects.filter(estado__icontains=query_string).order_by('nome')
+        lista_de_pets = Pet.objects.filter(nome__icontains=query_string).order_by('nome') | Pet.objects.filter(cidade__icontains=query_string).order_by('nome') | Pet.objects.filter(estado__icontains=query_string).order_by('nome') 
         paginator = Paginator(lista_de_pets, 3)
         pagina = request.GET.get('pagina')
         page_obj = paginator.get_page(pagina)

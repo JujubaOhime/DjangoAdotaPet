@@ -10,14 +10,6 @@ class PesquisaPetForm(forms.Form):
                                       'style':'border-radius: 25px; background-color: var(--blue) !important; color: var(--white)'}, ),
         required=False
     )
-
-    cidade = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'form-control border-0 bg-secondary d-none', 'max-lenght': '100',
-                                      'placeholder': 'Buscar', 'aria-describedby': 'button-addon1',
-                                      'style': 'border-radius: 25px; background-color: var(--blue) !important; color: var(--white)'}, ),
-        required=False
-    )
-
     #<input type="text" name="nome" id="id_nome" class="form-control form-control-sm" maxlength="100">
 
 

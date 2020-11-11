@@ -1,13 +1,14 @@
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
+import datetime
 
 class PetOwner(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     genero_escolhas = [('F', 'Feminino'), ('M', 'Masculino'), ('N', 'Outro')]
     genero = models.CharField(max_length=1, choices=genero_escolhas, default='N')
     imagem = models.CharField(max_length=50, blank=True)
-    data_cadastro = models.DateField()
+    data_cadastro = models.DateField(default=datetime.date.today)
     data_nascimento = models.DateField()
     estado_escolhas = [('AC', 'Acre'), ('AL', 'Alagoas'), ('AP', 'Amapá'), ('AM', 'Amazonas'),
                        ('BA', 'Bahia'), ('CE', 'Ceará'), ('ES', 'Espírito Santo'), ('GO', 'Goiás'),

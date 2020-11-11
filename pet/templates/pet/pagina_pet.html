@@ -2,32 +2,32 @@
 {% load static %}
 
 {% block titulo %}
-    Página {{ pet.nome }}
+Página {{ pet.nome }}
 {% endblock %}
 
 {% block corpo %}
-    <section class="container">
-        <img style="height: 250px; width: 250px; border-radius: 500px" class="img-fluid mx-auto d-block mt-5"
-         src="{% static 'images/pets/' %}{{ pet.imagem }}" alt="{{ pet.nome }}">
-        <h2 class="text-center mt-3 text-primary">{{ pet.nome }}</h2>
-        <h3 class="mt-5">Categoria: {{ pet.categoria }}</h3>
-        <h3>Local: {{ pet.cidade }} - {{ pet.estado }}</h3>
-        {% if pet.raca %}
-            <h3>{{ pet.raca }}</h3>
-        {% endif %}
+<section class="container">
+    <img style="height: 250px; width: 250px; border-radius: 500px" class="img-fluid mx-auto d-block mt-5"
+        src="{% static 'images/pets/' %}{{ pet.imagem }}" alt="{{ pet.nome }}">
+    <h2 class="text-center mt-3 text-primary">{{ pet.nome }}</h2>
+    <h3 class="mt-5">Categoria: {{ pet.categoria }}</h3>
+    <h3>Local: {{ pet.cidade }} - {{ pet.estado }}</h3>
+    {% if pet.raca %}
+        <h3>{{ pet.raca }}</h3>
+    {% endif %}
         <h3>Contato: {{ pet.telefone }}</h3>
         <h3>Sexo: {{ pet.get_sexo }}</h3>
-        {% if pet.link_facebook %}
-            <h3>{{ pet.link_facebook }}</h3>
-        {% endif %}
-        {% if pet.link_instagram %}
-            <h3>{{ pet.link_instagram }}</h3>
-        {% endif %}
-        <h3>Nascimento: {{ pet.data_nascimento }}</h3>
-        <h3>Descrição:</h3>
-        <p>{{ pet.descricao }}</p>
+    {% if pet.link_facebook %}
+        <h3>{{ pet.link_facebook }}</h3>
+    {% endif %}
+    {% if pet.link_instagram %}
+        <h3>{{ pet.link_instagram }}</h3>
+    {% endif %}
+    <h3>Nascimento: {{ pet.data_nascimento }}</h3>
+    <h3>Descrição:</h3>
+    <p>{{ pet.descricao }}</p>
 
 
-    </section>
+</section>
 
 {% endblock %}

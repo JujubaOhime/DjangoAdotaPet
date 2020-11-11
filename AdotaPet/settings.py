@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pet',
     'categoria',
-    'autenticacao'
+    'autenticacao',
+
 ]
 
 MIDDLEWARE = [

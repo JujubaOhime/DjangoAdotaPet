@@ -10,12 +10,20 @@ def registra_usuario(request):
 
 
         if form.is_valid() and u_form.is_valid():
-            pass
+            form.save()
+            u_form.save()
+            form = UsuarioFormCustomizado()
+            u_form = ProfileForm()
+                
     else:
         form = UsuarioFormCustomizado()
         u_form = ProfileForm()
 
-    return render(request, 'autenticacao/registra_usuario.html', {'form': form, 'u_form': u_form})
+    context={
+        'form': form, 'u_form': u_form 
+    }
+
+    return render(request, 'autenticacao/registra_usuario.html', context)
 
 def exibe_usuario(request):
     pass

@@ -331,10 +331,9 @@ html, body {
  }
 
  #talkToUs input, #talkToUs textarea{
-     color: var(--black);
+     color: var(--black) !important;
      box-shadow: none;
-     border: 3px solid var(--blue);
-     
+     border: 3px solid var(--blue) !important;
  }
 
  #talkToUs textarea{
@@ -437,15 +436,7 @@ html, body {
      display: block
  }
 
- input, input:focus{
-    border-width: 0px !important;
-    outline:0px !important; /* I have also tried outline:none */
-    -webkit-appearance:none !important;
-    box-shadow: none !important;
-    -moz-box-shadow: none !important;
-    -webkit-box-shadow: none !important;
- }
-
- .form-control:focus{
-     box-shadow: none !important;
+ .row{
+    margin-right: 0px;
+    margin-left: 0px 
  }

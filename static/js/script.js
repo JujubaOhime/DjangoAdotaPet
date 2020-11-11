@@ -19,24 +19,24 @@ $(window).scroll(function() {
 
 
 $('document').ready(function(){
-    $('#inputCpf').mask('000.000.000-00');
-    $('#inputRG').mask("99.999.999-9");
-    $("#inputTel").mask("(00) 0000-00009");
-    $("#inputCep").mask("00000-000");
+    $('#id_cpf').mask('000.000.000-00');
+    $('#id_rg').mask("99.999.999-9");
+    $("#id_telefone").mask("(00) 0000-00009");
+    $("#id_cep").mask("00000-000");
 
 
     $("#formRegister").validate({
       rules: {  
-        inputConfirmPassword : {
-					equalTo : "#inputPassword"
+        password2 : {
+					equalTo : "#id_password1"
         },
-        inputCpf :{
+        cpf :{
           minlength : '14'
         },
-        inputRg :{
+        rg :{
           minlength : '12'
         },
-        inputUF :{
+        estado :{
           maxlength : '2'
         },
         checkbox :{
@@ -55,22 +55,20 @@ $('document').ready(function(){
     $("#inputUF").val("");
   }
 
-  $("#inputCep").blur(function() {
+  $("#id_cep").blur(function() {
     var cep = $(this).val().replace(/\D/g, '');
     if (cep != ""){
 
-      $("#inputDistrict").val("...");
-      $("#inputCity").val("...");
-      $("#inputUF").val("...");
+      $("#id_cidade").val("...");
+      $("#id_estado").val("...");
 
       //Consulta o webservice viacep.com.br/
       $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
 
           if (!("erro" in dados)) {
               //Atualiza os campos com os valores da consulta.
-              $("#inputDistrict").val(dados.bairro);
-              $("#inputCity").val(dados.localidade);
-              $("#inputUF").val(dados.uf);
+              $("#id_cidade").val(dados.localidade);
+              $("#id_estado").val(dados.uf);
           } //end if.
           else {
               //CEP pesquisado não foi encontrado.
