@@ -10,6 +10,7 @@ Registro de Conta
 <section id="login" class="register d-flex container w-100 justify-content-center align-items-center">
 
     <form action="" method="post" validate style="min-height: 330px; width: 600px;" id="formRegister" class="align-items-center pt-5 pb-5">
+        {% csrf_token %}
         <h2 class="text-secondary text-center mx-auto d-block w-100 text-uppercase pb-2">Cadastro</h2>
         {% for campo in form %}
         <div class="form-group">
@@ -17,7 +18,7 @@ Registro de Conta
             <div class="">
                 <input type="{{ campo.field.widget.input_type }}" name="{{ campo.name }}"
                     class="form-control {% if campo.errors %} is-invalid {% endif %}"
-                    {% if campo.required %}required{% endif %}
+                    required
                     id="{{ campo.id_for_label }}" value="{{ campo.value|default_if_none:''}}">
                 <div class="invalid-feedback">
                     {% for error in campo.errors %}
@@ -44,12 +45,13 @@ Registro de Conta
 
 
 
-        {% csrf_token %}
+
         <button type="submit" class="btn rounded mt-2 text-center d-block mx-auto pl-4 pr-4 pt-1 pb-1 text-white">
             Cadastrar
-        </button>   
-
+        </button>
     </form>
+
+
 </section>
 
 {% endblock %}
