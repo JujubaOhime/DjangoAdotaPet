@@ -1,10 +1,10 @@
 from django.contrib import admin
-from .models import PetOwner
+from .models import Profile
 # Register your models here.
 
-class PetOwnerAdmin(admin.ModelAdmin):
+class ProfileAdmin(admin.ModelAdmin):
     list_display = ['user', 'genero', 'data_cadastro', 'estado', 'cidade', 'cpf', 'rg']
     search_fields = ['estado', 'cidade']
     list_filter = [ 'estado']
 
-admin.site.register(PetOwner, PetOwnerAdmin)
+admin.site.register(Profile, ProfileAdmin)
