@@ -379,7 +379,7 @@ html, body {
      letter-spacing: 4px !important;
  }
 
- #login a{
+ #login a, #register a{
      color: var(--cyan) !important;
      text-decoration: none;
      font-family: Comfortaa;
@@ -439,4 +439,18 @@ html, body {
  .row{
     margin-right: 0px;
     margin-left: 0px 
+ }
+
+ #login .form-group{
+     flex-basis: 40% !important;
+ }
+
+ #login .form-group textarea{
+     max-height: 138px;
+     resize: none;
+ }
+
+ label[for=id_disponivel]{
+     display: block;
+     text-align: center;
  }

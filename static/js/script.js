@@ -18,7 +18,15 @@ $('.popover-dismiss').popover({
 $('document').ready(function () {
     $('#id_cpf').mask('000.000.000-00');
     $('#id_rg').mask("99.999.999-9");
-    $("#id_telefone").mask("(00) 0000-00009");
+    var options = {
+        onKeyPress: function (phone, e, field, options) {
+            var masks = ['(00) 0000-00000', '(00) 00000-0000'];
+            var mask = (phone.length > 14) ? masks[1] : masks[0];
+            $('#id_telefone').mask(mask, options);
+        }
+    };
+
+    $('#id_telefone').mask('(00) 0000-00000', options);
     $("#id_cep").mask("00000-000");
     $("#id_data_nascimento").mask("00/00/0000");
 
@@ -63,21 +71,21 @@ $('document').ready(function () {
                 equalTo: "#id_password1",
                 minlength: '5'
             },
-            password1:{
+            password1: {
                 minlength: '5'
             },
 
-            first_name:{
+            first_name: {
                 minlength: '3'
             },
-            last_name:{
+            last_name: {
                 minlength: '3'
             },
 
-            last_name:{
+            last_name: {
                 minlength: '3'
             },
-            username:{
+            username: {
                 minlength: '3'
             },
             cpf: {
@@ -89,19 +97,19 @@ $('document').ready(function () {
             inputUF: {
                 maxlength: '2'
             },
-            cep:{
+            cep: {
                 minlength: '9'
             },
-            data_nascimento:{
+            data_nascimento: {
                 maxlength: '10'
             },
 
 
         },
-        onfocusout: function(element) {
+        onfocusout: function (element) {
             this.element(element); // triggers validation
         },
-        onkeyup: function(element, event) {
+        onkeyup: function (element, event) {
             this.element(element); // triggers validation
         }
     });

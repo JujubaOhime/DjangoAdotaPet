@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from pet.forms import PesquisaPetForm, PetForm
 from pet.models import Pet
 from django.template.defaultfilters import slugify
-
+from django.contrib import messages
 
 
 def index(request):
@@ -42,15 +42,34 @@ def lista_pets(request):
 
 @user_passes_test(lambda u: u.is_staff)
 def cadastra_pets(request):
-    pet_form = PetForm()
+
+    if request.POST:
+        pet_form = PetForm(request.POST)
+        if pet_form.is_valid():
+            pet = pet_form.save(commit=False)
+            pet.slug = slugify(pet.nome)
+            pet.usuario = request.user
+            pet.save()
+            messages.add_message(request, messages.INFO, 'Pet cadastrado com sucesso!')
+
+            return render(request, 'pet/exibe_pet.html', {'pet': pet})
+
+        else:
+            print("ué")
+            print(pet_form.errors)
+            ctx = {'pet_form': pet_form}
+            return render(request, 'autenticacao/cadastra_pet.html', ctx)
+
+    else:
+        pet_form = PetForm()
 
     return render(request, 'pet/cadastra_pet.html', {'form': pet_form})
 
-@user_passes_test(lambda u: u.is_staff)
+
 def exibe_pet(request, id):
     pet = get_object_or_404(Pet, pk=id)
     request.session['pet_id_del'] = id
-    return render(request, 'pet/pagina_pet.html', {'pet': pet})
+    return render(request, 'pet/exibe_pet.html', {'pet': pet})
 
 @user_passes_test(lambda u: u.is_staff)
 def edita_pet(request, id):

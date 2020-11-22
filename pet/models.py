@@ -1,4 +1,8 @@
+from django.contrib.auth.models import User
 from django.db import models
+from django.utils.datetime_safe import datetime
+
+from autenticacao.models import Profile
 from categoria.models import Categoria
 
 class Pet(models.Model):
@@ -6,7 +10,7 @@ class Pet(models.Model):
     nome = models.CharField(max_length=100, db_index=True)
     slug = models.SlugField(max_length=100)
     imagem = models.CharField(max_length=50, blank=True)
-    preco = models.DecimalField(max_digits=6, decimal_places=2, default=0)
+    preco = models.DecimalField(max_digits=6, decimal_places=2, default="0,00")
     disponivel = models.BooleanField(default=False)
     link_instagram = models.URLField(max_length=200, blank=True)
     link_facebook = models.URLField(max_length=200, blank=True)
@@ -14,7 +18,7 @@ class Pet(models.Model):
     sexo_escolhas = [('F', 'Fêmea'), ('M', 'Macho'), ('N', 'Não sei')]
     sexo = models.CharField(max_length=1, choices=sexo_escolhas, default='N')
     descricao = models.TextField()
-    data_cadastro = models.DateField()
+    data_cadastro = models.DateField(default=datetime.now)
     data_nascimento = models.DateField(blank=True)
     likes = models.PositiveIntegerField(default=0)
     dislikes = models.PositiveIntegerField(default=0)
@@ -32,6 +36,7 @@ class Pet(models.Model):
     estado = models.CharField(max_length=2, choices=estado_escolhas)
     cep = models.CharField(max_length=9)
     cidade = models.CharField(max_length=20)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
 
     class Meta:
