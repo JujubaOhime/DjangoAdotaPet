@@ -27,7 +27,7 @@
 
         {% if pets %}
             <h1 class="mb-4 mt-4 text-center text-primary" style="font-size: 50px">Lista de Pets</h1>
-            <table style="width: 100%" class="table table-sm table-bordered table-responsive mb-4">
+            <table class="table-bordered table-responsive w-100 mx-auto mb-4">
                 <thead>
                     <tr>
                         <th class="text-center">Imagem</th>
@@ -36,39 +36,39 @@
                         <th class="text-center">Disponível</th>
                         <th class="text-center">Sexo</th>
                         <th class="text-center">Local</th>
-                        <th class="text-center">Ações</th>
+                        <th  class="text-center" > Ações </th>
                     </tr>
                 </thead>
                 <tbody>
                     {%  for pet in pets %}
                         <tr>
                             <td class="text-center align-middle" width="15%">
-                                <img style="width: 150px; height: 150px; border-radius: 200px;" class="mb-2 mt-2" src="{% static 'images/pets/' %}{{ pet.imagem }}" alt="{{ pet.nome }}">
+                                <img style="width: 150px; height: 150px; border-radius: 200px;" class="mb-2 mt-2 ml-2 mr-2" src="{% static 'images/pets/' %}{{ pet.imagem }}" alt="{{ pet.nome }}">
                             </td>
-                            <td class="text-center align-middle" width="15%">
+                            <td class="text-center align-middle ml-2 mr-2" >
                                 {{ pet.categoria }}
                             </td>
-                            <td width="10%" class="text-center align-middle">
+                            <td class="text-center align-middle ml-2 mr-2">
                                 {{ pet.nome }}
                             </td>
-                            <td width="5%" class="text-center align-middle">
+                            <td  class="text-center align-middle ml-2 mr-2">
                                 {{ pet.get_disponivel }}
                             </td>
-                            <td width="10%" class="text-center align-middle">
+                            <td  class="text-center align-middle ml-2 mr-2">
                                 {{ pet.get_sexo }}
                             </td>
-                            <td width="10%" class="text-center align-middle">
+                            <td class="text-center align-middle ml-2 mr-2">
                                 {{ pet.cidade }} - {{ pet.estado }}
                             </td>
-                            <td class="text-center align-middle d-inline-flex w-100 justify-content-center">
+                            <td class="text-center align-middle d-inline-flex justify-content-center align-items-center w-100" style="height: 175px">
                                  <a href="{% url 'pet:edita_pet' pet.id %}">
-                                     <i class="fas fa-edit" style="color: var(--success)"></i>
+                                     <i class="fas fa-edit ml-2" style="color: var(--success)"></i>
                                  </a>
                                  <form action="{% url 'pet:remove_pet' pet.id %}" method="POST" class="d-inline">
                                     {% csrf_token %}
-                                     <button type="submit" class='text-decoration-none border-0 confirm-delete'
+                                     <button type="submit" class='text-decoration-none border-0 p-0 confirm-delete'
                                              onclick="return confirm('Deseja deletar?')" style="background: none ">
-                                        <i class="fas fa-trash-alt" style="color: var(--danger)"></i>
+                                        <i class="fas fa-trash-alt mr-1 ml-1" style="color: var(--danger)"></i>
                                      </button>
                                  </form>
                             </td>
