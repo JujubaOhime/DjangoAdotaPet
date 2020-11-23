@@ -34,9 +34,9 @@
                         <th class="text-center">Categoria</th>
                         <th class="text-center">Nome</th>
                         <th class="text-center">Disponível</th>
-                        <th class="text-center">Data Cadastro</th>
                         <th class="text-center">Sexo</th>
                         <th class="text-center">Local</th>
+                        <th class="text-center">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,13 +55,22 @@
                                 {{ pet.get_disponivel }}
                             </td>
                             <td width="10%" class="text-center align-middle">
-                                {{ pet.data_cadastro | date:'d/m/y' }}
-                            </td>
-                            <td width="10%" class="text-center align-middle">
                                 {{ pet.get_sexo }}
                             </td>
                             <td width="10%" class="text-center align-middle">
                                 {{ pet.cidade }} - {{ pet.estado }}
+                            </td>
+                            <td class="text-center align-middle d-inline-flex w-100 justify-content-center">
+                                 <a href="{% url 'pet:edita_pet' pet.id %}">
+                                     <i class="fas fa-edit" style="color: var(--success)"></i>
+                                 </a>
+                                 <form action="{% url 'pet:remove_pet' pet.id %}" method="POST" class="d-inline">
+                                    {% csrf_token %}
+                                     <button type="submit" class='text-decoration-none border-0 confirm-delete'
+                                             onclick="return confirm('Deseja deletar?')" style="background: none ">
+                                        <i class="fas fa-trash-alt" style="color: var(--danger)"></i>
+                                     </button>
+                                 </form>
                             </td>
 
                         </tr>

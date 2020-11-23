@@ -7,7 +7,7 @@ class Categoria(models.Model):
 
     class Meta:
         db_table = 'categoria'
-        ordering = ('nome',)
+        ordering = ('nome', )
 
     def __str__(self):
         return self.nome

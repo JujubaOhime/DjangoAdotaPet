@@ -5,6 +5,8 @@ from pet.forms import PesquisaPetForm, PetForm
 from pet.models import Pet
 from django.template.defaultfilters import slugify
 from django.contrib import messages
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 
 def index(request):
@@ -44,13 +46,24 @@ def lista_pets(request):
 def cadastra_pets(request):
 
     if request.POST:
-        pet_form = PetForm(request.POST)
+        pet_id = request.session.get('pet_id')
+        if pet_id:
+            pet = get_object_or_404(Pet, pk=pet_id)
+            pet_form = PetForm(request.POST, instance=pet)
+        else:
+            pet_form = PetForm(request.POST)
+
         if pet_form.is_valid():
             pet = pet_form.save(commit=False)
             pet.slug = slugify(pet.nome)
             pet.usuario = request.user
             pet.save()
-            messages.add_message(request, messages.INFO, 'Pet cadastrado com sucesso!')
+
+            if pet_id:
+                messages.add_message(request, messages.INFO, 'Categoria alterado com sucesso!')
+                del request.session['pet_id']
+            else:
+                messages.add_message(request, messages.INFO, 'Pet cadastrado com sucesso!')
 
             return render(request, 'pet/exibe_pet.html', {'pet': pet})
 
@@ -58,9 +71,13 @@ def cadastra_pets(request):
             print("ué")
             print(pet_form.errors)
             ctx = {'pet_form': pet_form}
-            return render(request, 'autenticacao/cadastra_pet.html', ctx)
+            return render(request, 'pet/cadastra_pet.html', ctx)
 
     else:
+        try:
+            del request.session['pet_id']
+        except KeyError:
+            pass
         pet_form = PetForm()
 
     return render(request, 'pet/cadastra_pet.html', {'form': pet_form})
@@ -77,3 +94,14 @@ def edita_pet(request, id):
     pet_form = PetForm(instance=pet)
     request.session['pet_id'] = id
     return render(request, 'pet/cadastra_pet.html', {'form': pet_form})
+
+@user_passes_test(lambda u: u.is_staff)
+def remove_pet(request, id):
+    obj = get_object_or_404(Pet, id=id)
+    if request.method == "POST":
+        obj.delete()
+        return HttpResponseRedirect(reverse('pet:lista_pets'))
+    context = {
+        'object': obj
+    }
+    return render(request, 'pet/pesquisa_pet.html', context)

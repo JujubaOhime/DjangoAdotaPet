@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block titulo %}
+    Categoria {{ categoria.nome }}
+{% endblock %}
+
+{% block corpo %}
+    {% if categoria.id %}
+        <section class="container">
+            <h2 class="text-center mt-3 text-primary">{{ categoria.nome }}</h2>
+            <div class="form-group row" style="margin-bottom: 108px">
+                <div class="col-12">
+                    <div class="form-inline">
+                        <a href="{% url 'categoria:edita_categoria' categoria.id %}" class="btn btn-primary mr-3">
+                            Editar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+{% endblock %}

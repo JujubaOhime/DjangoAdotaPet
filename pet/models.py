@@ -10,7 +10,7 @@ class Pet(models.Model):
     nome = models.CharField(max_length=100, db_index=True)
     slug = models.SlugField(max_length=100)
     imagem = models.CharField(max_length=50, blank=True)
-    preco = models.DecimalField(max_digits=6, decimal_places=2, default="0,00")
+    preco = models.DecimalField(max_digits=6, decimal_places=2)
     disponivel = models.BooleanField(default=False)
     link_instagram = models.URLField(max_length=200, blank=True)
     link_facebook = models.URLField(max_length=200, blank=True)
