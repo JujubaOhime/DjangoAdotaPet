@@ -36,8 +36,9 @@ $('document').ready(function () {
                 let total = $('#id_quantidade').val() * $('#id_preco').val()
                 let totalpets = parseFloat($('.total-dinheiro').text())
                 $('.total-dinheiro').text(totalpets + total)
+                console.log(json.quantidade)
                 $("#ajax_pets").prepend(
-                    '<tr>' +
+                    '<tr id="' +json.pet_id + '">' +
                         '<td class="text-center align-middle">' +
                            nome +
                         '</td>' +
@@ -47,7 +48,7 @@ $('document').ready(function () {
                         '<td class="text-center align-middle">' +
                            quantidade +
                         '</td>' +
-                        '<td class="text-center align-middle">' +
+                        '<td class="text-center align-middle total">' +
                            total +
                         '</td>' +
                         '<td class="text-center align-middle d-inline-flex justify-content-center align-items-center w-100">' +
@@ -56,15 +57,12 @@ $('document').ready(function () {
                         '</td>' +
                     '</tr>'
                 )
+
             },
 
         });
 
         return false;
-    });
-
-    $('#cadastrar_ajax').on('click', function (e) {
-        console.log("apertou")
     });
 
     $('#id_cpf').mask('000.000.000-00');

@@ -125,15 +125,28 @@ def ajax_pet(request):
         response_data['preco'] = preco
         response_data['quantidade'] = quantidade
 
-        Pet.objects.create(
-            nome = nome,
-            preco = preco,
-            quantidade = quantidade,
-            )
 
-        #return JsonResponse(response_data)
+        pet = Pet.objects.create(
+            nome=nome,
+            preco=preco,
+            quantidade=quantidade,
+        )
+        pet.save()
+
+        pet_id = pet.id
+        response_data['pet_id'] = pet_id
+
+        return JsonResponse(response_data)
 
 
     return render(request, 'pet/ajax.html', {'pets': pets})
 
+def ajax_pet_delete(request, id):
+    obj = get_object_or_404(Pet, id=id)
+    if request.method == "POST":
+        obj.delete()
 
+    context = {
+        'object': obj
+    }
+    return render(request, 'pet/ajax.html', context)

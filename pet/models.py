@@ -62,3 +62,7 @@ class Pet(models.Model):
 
     def get_meses(self):
         pass
+
+    def total(self):
+        return (self.quantidade * self.preco)
+

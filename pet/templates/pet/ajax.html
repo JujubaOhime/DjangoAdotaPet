@@ -88,4 +88,10 @@
 {% endblock %}
 
 {% block script %}
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+
+    var rowCount = $('#ajax_pets >tr').length
+    console.log(rowCount)
 {% endblock %}
