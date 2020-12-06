@@ -49,7 +49,7 @@ class PetForm(forms.ModelForm):
                    'preco': forms.NumberInput(attrs={'maxlength': '7', 'min': '0', 'max': '10000', 'step': '0.05'}),
                    }
         fields = ('nome', 'descricao', 'categoria', 'preco', 'imagem', 'raca', 'sexo',
-                  'cep', 'estado', 'cidade', 'telefone',  'data_nascimento', 'link_instagram', 'link_facebook', 'disponivel'
+                  'cep', 'estado', 'cidade', 'telefone',  'data_nascimento', 'link_instagram', 'link_facebook', 'disponivel', 'quantidade'
                  )
 
         data_nascimento = forms.DateField(
@@ -59,3 +59,29 @@ class PetForm(forms.ModelForm):
         disponivel = forms.BooleanField(
             required=False
         )
+
+
+class PetAjax(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(PetAjax, self).__init__(*args, **kwargs)
+
+
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
+
+    class Meta:
+        model = Pet
+        widgets = {
+                   'sexo': forms.Select(),
+                   'categoria': forms.Select(),
+                   'cep': forms.TextInput(),
+                   'estado': forms.TextInput(attrs={'id': 'id_estado', 'name': 'estado', 'readonly': 'readonly'}),
+                   'cidade': forms.TextInput(attrs={'readonly': 'readonly'}),
+                   'telefone': forms.TextInput(),
+                   'disponivel': forms.CheckboxInput(),
+                   'preco': forms.NumberInput(attrs={'maxlength': '7', 'min': '0', 'max': '10000', 'step': '0.05'}),
+
+                   }
+        fields = ('nome', 'preco', 'quantidade',
+                 )

@@ -16,6 +16,57 @@ $('.popover-dismiss').popover({
 
 
 $('document').ready(function () {
+
+    $('#cadastrar_ajax').on('click', function (e) {
+        console.log("apertou")
+        let nome = $('#id_nome').val()
+        let preco = $('#id_preco').val()
+        let quantidade = $('#id_quantidade').val()
+        $.ajax({
+            data: {
+                nome: $('#id_nome').val(),
+                preco: $('#id_preco').val(),
+                quantidade: $('#id_quantidade').val(),
+                action: 'POST',
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            },
+            type: 'POST',
+            url: $(this).attr('pets/ajax_pet/'),
+            success: function (json) {
+                let total = $('#id_quantidade').val() * $('#id_preco').val()
+                let totalpets = parseFloat($('.total-dinheiro').text())
+                $('.total-dinheiro').text(totalpets + total)
+                $("#ajax_pets").prepend(
+                    '<tr>' +
+                        '<td class="text-center align-middle">' +
+                           nome +
+                        '</td>' +
+                        '<td class="text-center align-middle">' +
+                           preco +
+                        '</td>' +
+                        '<td class="text-center align-middle">' +
+                           quantidade +
+                        '</td>' +
+                        '<td class="text-center align-middle">' +
+                           total +
+                        '</td>' +
+                        '<td class="text-center align-middle d-inline-flex justify-content-center align-items-center w-100">' +
+                            '<button type="button" id="remover-pet" class="text-decoration-none border-0 p-0 confirm-delete" style="background: none ">' +
+                            '<i class="fas fa-trash-alt mr-1 ml-1" style="color: var(--danger)"></i>' +
+                        '</td>' +
+                    '</tr>'
+                )
+            },
+
+        });
+
+        return false;
+    });
+
+    $('#cadastrar_ajax').on('click', function (e) {
+        console.log("apertou")
+    });
+
     $('#id_cpf').mask('000.000.000-00');
     $('#id_rg').mask("99.999.999-9");
     var options = {

@@ -1,11 +1,15 @@
 from django.contrib.auth.decorators import user_passes_test, login_required
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
-from pet.forms import PesquisaPetForm, PetForm
+from django.utils.decorators import method_decorator
+from django.views.generic import ListView
+from django.http import JsonResponse
+
+from pet.forms import PesquisaPetForm, PetForm, PetAjax
 from pet.models import Pet
 from django.template.defaultfilters import slugify
 from django.contrib import messages
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 
 
@@ -65,6 +69,7 @@ def cadastra_pets(request):
             else:
                 messages.add_message(request, messages.INFO, 'Pet cadastrado com sucesso!')
 
+
             return render(request, 'pet/exibe_pet.html', {'pet': pet})
 
         else:
@@ -105,3 +110,30 @@ def remove_pet(request, id):
         'object': obj
     }
     return render(request, 'pet/pesquisa_pet.html', context)
+
+@user_passes_test(lambda u: u.is_staff)
+def ajax_pet(request):
+    pets = Pet.objects.all
+    response_data = {}
+
+    if request.POST:
+        nome = request.POST.get('nome')
+        preco = request.POST.get('preco')
+        quantidade = request.POST.get('quantidade')
+
+        response_data['nome'] = nome
+        response_data['preco'] = preco
+        response_data['quantidade'] = quantidade
+
+        Pet.objects.create(
+            nome = nome,
+            preco = preco,
+            quantidade = quantidade,
+            )
+
+        #return JsonResponse(response_data)
+
+
+    return render(request, 'pet/ajax.html', {'pets': pets})
+
+

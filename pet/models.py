@@ -6,22 +6,23 @@ from autenticacao.models import Profile
 from categoria.models import Categoria
 
 class Pet(models.Model):
-    categoria = models.ForeignKey(Categoria, related_name='pets', on_delete=models.DO_NOTHING)
+    categoria = models.ForeignKey(Categoria, related_name='pets', on_delete=models.DO_NOTHING, null=True, blank=True)
     nome = models.CharField(max_length=100, db_index=True)
     slug = models.SlugField(max_length=100)
-    imagem = models.CharField(max_length=50, blank=True)
+    imagem = models.CharField(max_length=50, blank=True, null=True)
     preco = models.DecimalField(max_digits=6, decimal_places=2)
-    disponivel = models.BooleanField(default=False)
-    link_instagram = models.URLField(max_length=200, blank=True)
-    link_facebook = models.URLField(max_length=200, blank=True)
-    telefone = models.CharField(max_length=15)
+    disponivel = models.BooleanField(default=True, blank=True)
+    quantidade = models.IntegerField()
+    link_instagram = models.URLField(max_length=200, blank=True, null=True)
+    link_facebook = models.URLField(max_length=200, blank=True, null=True)
+    telefone = models.CharField(max_length=15, blank=True)
     sexo_escolhas = [('F', 'Fêmea'), ('M', 'Macho'), ('N', 'Não sei')]
-    sexo = models.CharField(max_length=1, choices=sexo_escolhas, default='N')
-    descricao = models.TextField()
-    data_cadastro = models.DateField(default=datetime.now)
-    data_nascimento = models.DateField(blank=True)
-    likes = models.PositiveIntegerField(default=0)
-    dislikes = models.PositiveIntegerField(default=0)
+    sexo = models.CharField(max_length=1, choices=sexo_escolhas, default='N', blank=True, null=True)
+    descricao = models.TextField(blank=True, null=True)
+    data_cadastro = models.DateField(default=datetime.now, blank=True, null=True)
+    data_nascimento = models.DateField(blank=True, null=True)
+    likes = models.PositiveIntegerField(default=0, blank=True, null=True)
+    dislikes = models.PositiveIntegerField(default=0, blank=True, null=True)
     raca = models.CharField(max_length=20, blank=True)
     estado_escolhas = [('AC', 'Acre'), ('AL', 'Alagoas'), ('AP', 'Amapá'), ('AM', 'Amazonas'),
                        ('BA', 'Bahia'), ('CE', 'Ceará'), ('ES', 'Espírito Santo'), ('GO', 'Goiás'),
@@ -33,9 +34,9 @@ class Pet(models.Model):
                        ('SP', 'São Paulo'), ('SE', 'Sergipe'),
                        ('TO', 'Tocantins'), ('DF', 'Distrito Federal')]
 
-    estado = models.CharField(max_length=2, choices=estado_escolhas)
-    cep = models.CharField(max_length=9)
-    cidade = models.CharField(max_length=20)
+    estado = models.CharField(max_length=2, choices=estado_escolhas, blank=True)
+    cep = models.CharField(max_length=9, blank=True)
+    cidade = models.CharField(max_length=20, blank=True)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
 

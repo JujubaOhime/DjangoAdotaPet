@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block titulo %}
+    Ajax Pet
+{% endblock %}
+
+{% block corpo %}
+    <section id="login" class="register d-block container w-100 justify-content-center align-items-center">
+        <div class="container register ajax_div d-block">
+            <form class="mb-4 mt-5" method="POST" id="ajax_form" action="{% url 'pet:ajax_pet' %}">
+                {% csrf_token %}
+                <h2 class="text-secondary text-center mx-auto d-block w-100 text-uppercase pb-2">Cadastro de Pet</h2>
+                <div class=" flex-wrap justify-content-around align-content-center">
+
+                    <div class="form-group">
+                        <label for="id_nome"
+                               class="font-weight-bold text-secondary">Nome
+                        </label>
+
+                        <div>
+                            <input type="text" class="form-control" name="nome" maxlength="100" id="id_nome" validate>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group d-block">
+                        <label for="id_preco"
+                               class="font-weight-bold text-secondary">Preço
+                        </label>
+
+                        <div>
+                            <input type="number" class="form-control" name='preco' maxlength="7" minlength="0"
+                                   max="10000" step="0.5" id="id_preco">
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_quantidade"
+                               class="font-weight-bold text-secondary">Quantidade
+                        </label>
+
+                        <div>
+                            <input type="number" class="form-control" id="id_quantidade" name='quantidade' step="1"
+                                   pattern="\d+">
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <button type="button" id="cadastrar_ajax"
+                        class="btn rounded mt-4 text-center d-block mx-auto pl-4 pr-4 pt-1 pb-1 text-white cadastro-ajax">
+                    Cadastrar
+                </button>
+
+            </form>
+        </div>
+
+
+    </section>
+    <div class="table-responsive ">
+        <table class="table-bordered table-striped mx-auto mb-4">
+            <thead>
+            <tr>
+                <th width="25%" class="text-center">Nome</th>
+                <th width="20%" class="text-center">Preço</th>
+                <th class="text-center">Quantidade</th>
+                <th class="text-center text-right">Preço Total</th>
+                <th width="10%" class="text-center">Ação</th>
+            </tr>
+            </thead>
+            <tbody id="ajax_pets">
+            <tr>
+                <td colspan="3">
+                    Preço total
+                </td>
+                <td class="total-dinheiro text-right">0</td>
+                <td></td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+{% endblock %}
