@@ -13,5 +13,6 @@ urlpatterns = [
     path('remove_pet/<int:id>', views.remove_pet, name='remove_pet'),
 
     path('ajax_pet/', views.ajax_pet, name='ajax_pet'),
-    path('ajax_pet/<int:id>', views.ajax_pet_delete, name='ajax_pet_delete'),
+    path('ajax_pet_delete/<int:id>', views.ajax_pet_delete, name='ajax_pet_delete'),
+    path('ajax_pet_atualiza/', views.ajax_pet_atualiza, name='ajax_pet_atualiza')
 ]

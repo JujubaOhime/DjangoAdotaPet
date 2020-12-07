@@ -17,8 +17,69 @@ $('.popover-dismiss').popover({
 
 $('document').ready(function () {
 
+
+    $(document).on("blur", ".quantidade", function(e) {
+			let valor = $(this).val()
+			if (valor < 0 || valor > 99) {
+				console.log(this)
+				$(this).focus()
+				return
+			}
+			var serializedData = $(this).parent().serialize();
+			var tr = $(this).parent().parent().parent()
+            var id = $(this).parent().parent().parent().attr("id")
+
+            console.log(id)
+            console.log()
+            var quantidade = tr.find('.quantidade').val()
+            var token = tr.find('input[name=csrfmiddlewaretoken]').val()
+            let url = '/pets/ajax_pet_atualiza/'
+			$.ajax({
+				type:'POST',
+				url: url,
+				data: {
+				    quantidade: quantidade,
+                    csrfmiddlewaretoken: token,
+                    pet_id: id
+                },
+				success:function(data){
+				    let preco = parseFloat($(tr).find('.preco').text())
+                    let novo_total = preco * quantidade
+
+                    let preco_removido = $(tr).find('td.preco-total').text()
+                    preco_removido = parseFloat(preco_removido)
+
+                    $(tr).find('td.preco-total').text(novo_total)
+
+                    let totalpets = parseFloat($('.total-dinheiro').text())
+                    let novo_total_pets = totalpets - preco_removido + novo_total
+					$('.total-dinheiro').text(novo_total_pets)
+				},
+			})
+		})
+
+    $(document).on('click', '.remover-pet', function () {
+        pet_id = $(this).attr("id")
+        let urldelete = '/pets/ajax_pet_delete/' + pet_id
+        $.ajax({
+            data: {
+               csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            },
+            url: urldelete,
+            type: 'POST',
+            dataType: 'json',
+            success: function (data){
+                let tr = "#tr" + pet_id
+                let preco_removido = $(tr).find('td.preco-total').text()
+                preco_removido = parseFloat(preco_removido)
+                let totalpets = parseFloat($('.total-dinheiro').text())
+                $('.total-dinheiro').text(totalpets - preco_removido)
+                $(tr).remove()
+            }
+        })
+    });
+
     $('#cadastrar_ajax').on('click', function (e) {
-        console.log("apertou")
         let nome = $('#id_nome').val()
         let preco = $('#id_preco').val()
         let quantidade = $('#id_quantidade').val()
@@ -32,31 +93,16 @@ $('document').ready(function () {
             },
             type: 'POST',
             url: $(this).attr('pets/ajax_pet/'),
-            success: function (json) {
+
+            success: function (data) {
                 let total = $('#id_quantidade').val() * $('#id_preco').val()
                 let totalpets = parseFloat($('.total-dinheiro').text())
                 $('.total-dinheiro').text(totalpets + total)
-                console.log(json.quantidade)
-                $("#ajax_pets").prepend(
-                    '<tr id="' +json.pet_id + '">' +
-                        '<td class="text-center align-middle">' +
-                           nome +
-                        '</td>' +
-                        '<td class="text-center align-middle">' +
-                           preco +
-                        '</td>' +
-                        '<td class="text-center align-middle">' +
-                           quantidade +
-                        '</td>' +
-                        '<td class="text-center align-middle total">' +
-                           total +
-                        '</td>' +
-                        '<td class="text-center align-middle d-inline-flex justify-content-center align-items-center w-100">' +
-                            '<button type="button" id="remover-pet" class="text-decoration-none border-0 p-0 confirm-delete" style="background: none ">' +
-                            '<i class="fas fa-trash-alt mr-1 ml-1" style="color: var(--danger)"></i>' +
-                        '</td>' +
-                    '</tr>'
-                )
+                console.log(data.html)
+
+                $("#ajax_pets").prepend(data.html)
+
+
 
             },
 
@@ -216,8 +262,6 @@ $('document').ready(function () {
         }
 
     })
-
-    document.getElementById("id_data_nascimento").max = "2007-01-01";
 
 
 });

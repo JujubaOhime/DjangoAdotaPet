@@ -4,8 +4,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView
 from django.http import JsonResponse
-
-from pet.forms import PesquisaPetForm, PetForm, PetAjax
+from django.db.models import Sum
+from django.template import loader
+from pet.forms import PesquisaPetForm, PetForm, PetAjax, QuantidadeForm
 from pet.models import Pet
 from django.template.defaultfilters import slugify
 from django.contrib import messages
@@ -113,8 +114,19 @@ def remove_pet(request, id):
 
 @user_passes_test(lambda u: u.is_staff)
 def ajax_pet(request):
-    pets = Pet.objects.all
+    pets = Pet.objects.all()
+    total_estoque = 0
+    listaDePets = []
+    for i in pets:
+        total_estoque = total_estoque + i.preco*i.quantidade
+        i.preco = float(i.preco)
+        i.quantidade = int(i.quantidade)
+        total = i.quantidade * i.preco
+        listaDePets.append({'id': i.id, 'nome': i.nome, 'preco': i.preco,
+                            'total': total, 'inputEstoque':
+                                QuantidadeForm(initial={'quantidade': i.quantidade, 'pet_id': i.id}), 'quantidade': i.quantidade})
     response_data = {}
+
 
     if request.POST:
         nome = request.POST.get('nome')
@@ -124,7 +136,6 @@ def ajax_pet(request):
         response_data['nome'] = nome
         response_data['preco'] = preco
         response_data['quantidade'] = quantidade
-
 
         pet = Pet.objects.create(
             nome=nome,
@@ -136,17 +147,57 @@ def ajax_pet(request):
         pet_id = pet.id
         response_data['pet_id'] = pet_id
 
+        preco = float(preco)
+        quantidade = int(quantidade)
+        total = preco * quantidade
+        pet = {'id': pet_id, 'nome': nome, 'preco': preco, 'total': total,
+               'inputEstoque': QuantidadeForm(initial={'quantidade': quantidade,
+                'pet_id': pet_id}), 'quantidade': quantidade}
+        template = loader.get_template('pet/rowPet.html')
+        html = template.render({'pet': pet}, request)
+        response_data['html'] = html
+
         return JsonResponse(response_data)
 
 
-    return render(request, 'pet/ajax.html', {'pets': pets})
+    return render(request, 'pet/ajax.html', {'pets': pets, 'listaPets': listaDePets, 'total_estoque': total_estoque})
+
+def ajax_pet_atualiza(request):
+    if request.POST:
+        quantidadeForm = QuantidadeForm(request.POST)
+        if(quantidadeForm.is_valid()):
+            id = quantidadeForm.cleaned_data['pet_id']
+            quantidade = quantidadeForm.cleaned_data['quantidade']
+            pet = get_object_or_404(Pet, id=id)
+            pet.quantidade = quantidade
+            pet.save()
+            pets = Pet.objects.all()
+            total = 0
+            for i in pets:
+                res = int(i.quantidade) * float(i.preco)
+                total = total + res
+            total = round(total, 2)
+            pet = {'id': id, 'nome': pet.nome, 'preco': pet.preco, 'total': total,
+                   'inputEstoque': QuantidadeForm(initial={'quantidade': quantidade,
+                                                           'pet_id': id}), 'quantidade': quantidade}
+            template = loader.get_template('pet/rowPet.html')
+            html = template.render({'pet': pet}, request)
+            return JsonResponse({'html': html, 'total_estoque': total})
+
+    return redirect('pet:ajax_pet')
 
 def ajax_pet_delete(request, id):
+    data = dict()
     obj = get_object_or_404(Pet, id=id)
     if request.method == "POST":
         obj.delete()
+        data['message'] = "deletado"
 
     context = {
         'object': obj
     }
-    return render(request, 'pet/ajax.html', context)
+
+    return JsonResponse(data)
+
+
+

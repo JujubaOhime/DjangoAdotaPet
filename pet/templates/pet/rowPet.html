@@ -1,0 +1,27 @@
+<tr id="{{ pet.id }}">
+    <td class="text-center align-middle">
+        {{ pet.nome }}
+    </td>
+    <td class="text-center align-middle preco">
+        {{ pet.preco }}
+    </td>
+    <td class="text-center align-middle">
+        <form method="POST">
+            {% csrf_token %}
+            {{ pet.inputEstoque.quantidade}}
+            {{ pet.inputEstoque.pet_id }}
+        </form>
+    </td>
+    <td class="text-center align-middle preco-total">
+        {{ pet.total }}
+    </td>
+    <td class="text-center align-middle d-inline-flex justify-content-center align-items-center w-100">
+        <form action="{% url 'pet:ajax_pet_delete' pet.id %}" method="POST" class="d-inline">
+            {% csrf_token %}
+            <button type="button" id="{{ pet.id }}"
+                    class="remover-pet text-decoration-none border-0 p-0 confirm-delete" style="background: none ">
+                <i class="fas fa-trash-alt mr-1 ml-1" style="color: var(--danger)"></i>
+            </button>
+        </form>
+    </td>
+</tr>

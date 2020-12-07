@@ -85,3 +85,18 @@ class PetAjax(forms.ModelForm):
                    }
         fields = ('nome', 'preco', 'quantidade',
                  )
+
+class QuantidadeForm(forms.Form):
+
+    pet_id = forms.CharField(widget=forms.HiddenInput())
+
+    # <input type="hidden" name="produto_id" required="" id="id_produto_id" value="xxx">
+
+    quantidade = forms.IntegerField(
+        min_value=0,
+        max_value=99,
+        widget=forms.TextInput(attrs={'class': 'form-control btn-light quantidade mx-auto',
+                                      'style': 'text-align: center; height: 20px; background-color: unset; width: 55px; border: 1px solid #252525',
+                                      'onkeypress': 'return (event.charCode >= 48 && event.charCode <= 57)'}),
+        required=True
+    )

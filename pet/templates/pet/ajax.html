@@ -51,7 +51,7 @@
 
                 </div>
 
-                <button type="button" id="cadastrar_ajax"
+                <button type="submit" id="cadastrar_ajax"
                         class="btn rounded mt-4 text-center d-block mx-auto pl-4 pr-4 pt-1 pb-1 text-white cadastro-ajax">
                     Cadastrar
                 </button>
@@ -61,8 +61,8 @@
 
 
     </section>
-    <div class="table-responsive ">
-        <table class="table-bordered table-striped mx-auto mb-4">
+    <div class="table-responsive container">
+        <table class="table-bordered table-striped mx-auto mb-4 w-100">
             <thead>
             <tr>
                 <th width="25%" class="text-center">Nome</th>
@@ -73,13 +73,17 @@
             </tr>
             </thead>
             <tbody id="ajax_pets">
+                {% for pet in listaPets %}
+                    {% include 'pet/rowPet.html' %}
+                {% endfor %}
             <tr>
                 <td colspan="3">
                     Preço total
                 </td>
-                <td class="total-dinheiro text-right">0</td>
+                <td class="total-dinheiro text-right">{{ total_estoque }}</td>
                 <td></td>
             </tr>
+
             </tbody>
 
         </table>
@@ -89,9 +93,7 @@
 
 {% block script %}
     if ( window.history.replaceState ) {
-        window.history.replaceState( null, null, window.location.href );
+    window.history.replaceState( null, null, window.location.href );
     }
 
-    var rowCount = $('#ajax_pets >tr').length
-    console.log(rowCount)
 {% endblock %}
