@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load humanize %}
 
 {% block titulo %}
     Ajax Pet
@@ -80,7 +81,7 @@
                 <td colspan="3">
                     Preço total
                 </td>
-                <td class="total-dinheiro text-right">{{ total_estoque }}</td>
+                <td class="total-dinheiro text-right">{{total_estoque|floatformat:2}}</td>
                 <td></td>
             </tr>
 

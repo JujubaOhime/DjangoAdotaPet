@@ -43,16 +43,20 @@ $('document').ready(function () {
                     pet_id: id
                 },
 				success:function(data){
-				    let preco = parseFloat($(tr).find('.preco').text())
-                    let novo_total = preco * quantidade
+				    let preco = $(tr).find('.preco').text().replace(',', '.')
+                    let novo_total = preco * parseInt(quantidade)
+                    novo_total = parseFloat(novo_total)
 
-                    let preco_removido = $(tr).find('td.preco-total').text()
+                    let preco_removido = $(tr).find('td.preco-total').text().replace(',', '.')
                     preco_removido = parseFloat(preco_removido)
 
-                    $(tr).find('td.preco-total').text(novo_total)
+                    $(tr).find('td.preco-total').text(novo_total.toFixed(2).replace('.',','))
 
-                    let totalpets = parseFloat($('.total-dinheiro').text())
+
+                    let totalpets = parseFloat($('.total-dinheiro').text().replace(',','.'))
                     let novo_total_pets = totalpets - preco_removido + novo_total
+                    novo_total_pets = novo_total_pets.toFixed(2)
+                    novo_total_pets = novo_total_pets.replace(".", ",")
 					$('.total-dinheiro').text(novo_total_pets)
 				},
 			})
@@ -69,11 +73,11 @@ $('document').ready(function () {
             type: 'POST',
             dataType: 'json',
             success: function (data){
-                let tr = "#tr" + pet_id
-                let preco_removido = $(tr).find('td.preco-total').text()
-                preco_removido = parseFloat(preco_removido)
-                let totalpets = parseFloat($('.total-dinheiro').text())
-                $('.total-dinheiro').text(totalpets - preco_removido)
+                let tr = "#" + pet_id
+                let preco_removido = parseFloat($(tr).find('td.preco-total').text().replace(',', '.'))
+                let totalpets = parseFloat($('.total-dinheiro').text().replace(',', '.'))
+                console.log(preco_removido, totalpets)
+                $('.total-dinheiro').text((totalpets - preco_removido).toFixed(2).replace('.', ','))
                 $(tr).remove()
             }
         })
@@ -95,9 +99,11 @@ $('document').ready(function () {
             url: $(this).attr('pets/ajax_pet/'),
 
             success: function (data) {
-                let total = $('#id_quantidade').val() * $('#id_preco').val()
-                let totalpets = parseFloat($('.total-dinheiro').text())
-                $('.total-dinheiro').text(totalpets + total)
+                let preco = parseFloat($('#id_preco').val().replace(',', '.'))
+                quantidade = parseInt(quantidade)
+                let total = preco * quantidade
+                let totalpets = parseFloat($('.total-dinheiro').text().replace(',', '.'))
+                $('.total-dinheiro').text((totalpets + total).toFixed(2).replace('.', ','))
                 console.log(data.html)
 
                 $("#ajax_pets").prepend(data.html)

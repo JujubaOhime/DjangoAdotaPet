@@ -3,7 +3,7 @@
         {{ pet.nome }}
     </td>
     <td class="text-center align-middle preco">
-        {{ pet.preco }}
+        {{ pet.preco|floatformat:2 }}
     </td>
     <td class="text-center align-middle">
         <form method="POST">
@@ -13,7 +13,7 @@
         </form>
     </td>
     <td class="text-center align-middle preco-total">
-        {{ pet.total }}
+        {{ pet.total|floatformat:2}}
     </td>
     <td class="text-center align-middle d-inline-flex justify-content-center align-items-center w-100">
         <form action="{% url 'pet:ajax_pet_delete' pet.id %}" method="POST" class="d-inline">
